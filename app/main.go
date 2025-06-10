@@ -38,9 +38,9 @@ func main() {
 			if len(match[1]) <= 1 {
 				fmt.Println("usage: type <command>")
 			} else if _, ok := commands[match[1][1:]]; ok {
-				fmt.Println(match[1] + " is a shell builtin")
+				fmt.Println(match[1][1:] + " is a shell builtin")
 			} else {
-				fmt.Println(match[1] + ": not found")
+				fmt.Println(match[1][1:] + ": not found")
 			}
 		default:
 			fmt.Println(command[:len(command)-1] + ": command not found")
