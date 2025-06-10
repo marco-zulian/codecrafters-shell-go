@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"regexp"
+	"strings"
 )
 
 func main() {
@@ -11,6 +13,14 @@ func main() {
 		fmt.Fprint(os.Stdout, "$ ")
 
 		command, _ := bufio.NewReader(os.Stdin).ReadString('\n')
-		fmt.Println(command[:len(command)-1] + ": command not found")
+		trimCommand := strings.TrimSpace(command)
+
+		exitRegex := regexp.MustCompile(`^exit (\d*)$`)
+		switch {
+		case exitRegex.MatchString(trimCommand):
+			return
+		default:
+			fmt.Println(command[:len(command)-1] + ": command not found")
+		}
 	}
 }
